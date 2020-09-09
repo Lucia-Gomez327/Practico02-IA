@@ -18,14 +18,13 @@ var inicioY
 var vueltaAPosicionInicial = false
 var salto = -2
 var volviendo
+var count = 0
 
 var arrayPuntosRecorridos = new Array()
 
 function crearTabla() {
    ejeX = Math.floor(Math.random() * 8) + 2
-   //ejeX = 2
    ejeY = Math.floor(Math.random() * 8) + 2
-    //ejeY = 7
 
     var tabla = document.getElementById('table')
 
@@ -60,14 +59,12 @@ function setAspiradora() {
 
     aspiradora.style.transform = 'rotate(360deg)'
     $(td).append(aspiradora)
-    //alert(inicioAspiradora)
 
     setTimeout(limpiar, 700)
     setTimeout(() => { $(td).css('background-color', 'red') }, 1000)
 
     setTimeout(mover, 2000)
 }
-
 
 
 function limpiar() {
@@ -95,13 +92,11 @@ function mover() {
     if (comprobarRecorridoCompleto()) {
 
         if ((x + '' + y) == inicioAspiradora) {
-            alert('termino en mover')
+            ('termino en mover')
             vueltaAPosicionInicial = true
             return true
         }
-
     }
-
     if (!vueltaAPosicionInicial) {
         var mov = Math.floor(Math.random() * 2)
 
@@ -114,42 +109,36 @@ function mover() {
                 der = 0
             }
         }
-
         else {
             if (izq < 2 && !izquierda()) {
                 derecha()
-
             }
             if (izq == 3) {
                 izq = 0
-            }
-        
+            }       
         }
     }
-   // setSecuencia()
     if ((x + '' + y) != inicioAspiradora)
         setTimeout(() => { $(td).css('background-color', 'rgb(227, 255, 224)') }, 300)
 
-
-
     movimiento = setTimeout(mover, 500)
 
-
-
 if (comprobarRecorridoCompleto()) {
-
     volver()
-
+}
 
 }
 
+function contador(){
 
+    var inputContaro = document.getElementById("contador")
+    inputContaro.value = count++
+    
 }
 
 
 
 function derecha() {
-
 
     if (orientacion == 0 && x == (ejeX - 1)) {
         return false;
@@ -169,12 +158,12 @@ function derecha() {
 
         x++
         orientacion = 90
-        //alert(getOrientacion() + ' :' + ' Funcion Derecha' + ' valor de orientacion=' + orientacion)
         aspiradora.style.transform = 'rotate(90deg)'
         td = "#" + x + '' + y
         $(document).remove(aspiradora)
         $(td).append(aspiradora)
         setTimeout(limpiar, 200)
+        contador()
         return true;
 
     }
@@ -182,12 +171,12 @@ function derecha() {
 
         y++
         orientacion = 180
-        //alert(getOrientacion() + ' :' + ' Funcion Derecha' + ' valor de orientacion=' + orientacion)
         aspiradora.style.transform = 'rotate(180deg)'
         td = "#" + x + '' + y
         $(document).remove(aspiradora)
         $(td).append(aspiradora)
         setTimeout(limpiar, 200)
+        contador()
         return true
     }
 
@@ -195,24 +184,24 @@ function derecha() {
 
         x--
         orientacion = 270
-        //alert(getOrientacion() + ' :' + ' Funcion Derecha' + ' valor de orientacion=' + orientacion)
         aspiradora.style.transform = 'rotate(270deg)'
         td = "#" + x + '' + y
         $(document).remove(aspiradora)
         $(td).append(aspiradora)
         setTimeout(limpiar, 200)
+        contador()
         return true
     }
     if (orientacion == 270) {
 
         y--
         orientacion = 0
-        //alert(getOrientacion() + ' :' + ' Funcion Derecha' + ' valor de orientacion=' + orientacion)
         aspiradora.style.transform = 'rotate(0deg)'
         td = "#" + x + '' + y
         $(document).remove(aspiradora)
         $(td).append(aspiradora)
         setTimeout(limpiar, 200)
+        contador()
         return true
     }
 
@@ -239,12 +228,12 @@ function izquierda() {
 
         x--
         orientacion = 270
-        //alert(getOrientacion() + ' :' + ' Funcion Izquierda' + ' valor de orientacion=' + orientacion)
         aspiradora.style.transform = 'rotate(270deg)'
         td = "#" + x + '' + y
         $(document).remove(aspiradora)
         $(td).append(aspiradora)
         setTimeout(limpiar, 200)
+        contador()
         return true;
 
     }
@@ -252,12 +241,12 @@ function izquierda() {
 
         y--
         orientacion = 0
-        //alert(getOrientacion() + ' :' + ' Funcion Izquierda' + ' valor de orientacion=' + orientacion)
         aspiradora.style.transform = 'rotate(0deg)'
         td = "#" + x + '' + y
         $(document).remove(aspiradora)
         $(td).append(aspiradora)
         setTimeout(limpiar, 200)
+        contador()
         return true
     }
 
@@ -265,24 +254,24 @@ function izquierda() {
 
         x++
         orientacion = 90
-        //alert(getOrientacion() + ' :' + ' Funcion Izquierda' + ' valor de orientacion=' + orientacion)
         aspiradora.style.transform = 'rotate(90deg)'
         td = "#" + x + '' + y
         $(document).remove(aspiradora)
         $(td).append(aspiradora)
         setTimeout(limpiar, 200)
+        contador()
         return true
     }
     if (orientacion == 270) {
 
         y++
         orientacion = 180
-        //alert(getOrientacion() + ' :' + ' Funcion Izquierda' + ' valor de orientacion=' + orientacion)
         aspiradora.style.transform = 'rotate(180deg)'
         td = "#" + x + '' + y
         $(document).remove(aspiradora)
         $(td).append(aspiradora)
         setTimeout(limpiar, 200)
+        contador()
         return true
     }
 }
@@ -292,28 +281,21 @@ function izquierda() {
 
 
 function volver() {
-    //alert('en volver'+x+';'+y+'ori='+ getOrientacion())
     if (y == inicioY && x > (inicioX - 1) && getOrientacion() == 'izquierda') {
         clearTimeout(movimiento)
-        // alert('aca')
         yExMismaLinea()
-
         return true
     }
 
     if (y == inicioY && x < (inicioX - 1) && getOrientacion() == 'derecha') {
         clearTimeout(movimiento)
-        // alert('aca')
         yExMismaLinea()
-
         return true
     }
 
     //Desde aca vuelve cuando se encuentra abajo y a la izquierda mirando hacia arriba
     if (y > inicioY && x == (inicioX - 1) && getOrientacion() == 'arriba') {
         clearTimeout(movimiento)
-        // alert('aca')
-        
         yAbajoIzquierdaArribaDerecha()
         return true
     }
@@ -321,8 +303,6 @@ function volver() {
     //Desde aca vuelve cuando se encuentra arriba del punto inicial, a la derecha de este mirando abajo
     if (y < inicioY && x == (inicioX + 1) && getOrientacion() == 'abajo') {
         clearTimeout(movimiento)
-        // alert('aca')
-        
         yAbajoIzquierdaArribaDerecha()
         return true
     }
@@ -330,15 +310,11 @@ function volver() {
 //Desde aca vuelve cuando se encuentra abajo y a la derecha mirando hacia arriba
     if (y > inicioY && x == (inicioX +1) && getOrientacion() == 'arriba') {
         clearTimeout(movimiento)
-        // alert('aca')
-        
         yAbajoDerechaArribaIzquierda()
         return true
     }
     if (y < inicioY && x == (inicioX -1) && getOrientacion() == 'abajo') {
         clearTimeout(movimiento)
-        // alert('aca')
-        
         yAbajoDerechaArribaIzquierda()
         return true
     }
@@ -347,18 +323,12 @@ function volver() {
 
     if (x == inicioX && x == y > inicioY && getOrientacion() == 'abajo') {
         clearTimeout(movimiento)
-        // alert('aca')
         yExMismaLinea()
-
         return true
-    }
-
-    
+    }   
     if (x == inicioX && y < inicioY && getOrientacion() == 'arriba') {
         clearTimeout(movimiento)
-        // alert('aca')
         yExMismaLinea()
-
         return true
     }
 
@@ -366,17 +336,14 @@ function volver() {
 }
 
 function yExMismaLinea() {
-    //alert(secuencia)
-    // alert(x + ';' + y + '' + 'En yDerechaoIzquierda')
+
     if (!vueltaAPosicionInicial) {
         if (salto == 0) {
             if (secuencia.length == 0 && izqder == 0) {
                 secuencia = [1, 1, 0, 0]
-                // alert(secuencia.length)
             }
             if (secuencia.length == 0 && izqder == 1) {
                 secuencia = [0, 0, 1, 1]
-                //  alert(secuencia.length)
             }
             if (secuencia[0] == 1) {
                 derecha()
@@ -407,19 +374,13 @@ function yExMismaLinea() {
         if ((x + '' + y) == inicioAspiradora) {
             clearTimeout(volviendo)
             vueltaAPosicionInicial = true
-            alert('Proceso terminado')
             return true
         }
         else {
             clearTimeout(movimiento)
-            // alert(x + ';' + y + ' yDerechaoIzquierda')
             volviendo = setTimeout(yExMismaLinea, 1000)
-
-
         }
     }
-
-
 }
 
 function yAbajoIzquierdaArribaDerecha(){
@@ -428,7 +389,6 @@ function yAbajoIzquierdaArribaDerecha(){
 
             if (secuencia.length == 0 && izqder == 1) {
                 secuencia = [0, 0, 1, 1]
-                //  alert(secuencia.length)
             }
             if (secuencia[0] == 1) {
                 derecha()
@@ -442,8 +402,7 @@ function yAbajoIzquierdaArribaDerecha(){
         if (salto != -2 && salto != 0) {
             if (izqder == -1) {      
                     derecha()
-                    izqder = 1
-                
+                    izqder = 1           
             }
             salto = 0
         }
@@ -454,15 +413,12 @@ function yAbajoIzquierdaArribaDerecha(){
         if ((x + '' + y) == inicioAspiradora) {
             clearTimeout(volviendo)
             vueltaAPosicionInicial = true
-            alert('Proceso terminado')
+            ('Proceso terminado')
             return true
         }
         else {
             clearTimeout(movimiento)
-            // alert(x + ';' + y + ' yDerechaoIzquierda')
             volviendo = setTimeout( yAbajoIzquierdaArribaDerecha, 1000)
-
-
         }
     }
 
@@ -473,7 +429,6 @@ function yAbajoDerechaArribaIzquierda(){
         if (salto == 0) {
             if (secuencia.length == 0 && izqder == 0) {
                 secuencia = [1, 1, 0, 0]
-                // alert(secuencia.length)
             }
             if (secuencia[0] == 1) {
                 derecha()
@@ -489,27 +444,21 @@ function yAbajoDerechaArribaIzquierda(){
 
                 if (izquierda())
                     izqder = 0
-
-
             }
             salto = 0
         }
 
         if (salto == -2)
             salto = -1
-
         if ((x + '' + y) == inicioAspiradora) {
             clearTimeout(volviendo)
             vueltaAPosicionInicial = true
-            alert('Proceso terminado')
+            ('Proceso terminado')
             return true
         }
         else {
             clearTimeout(movimiento)
-            // alert(x + ';' + y + ' yDerechaoIzquierda')
             volviendo = setTimeout(yExMismaLinea, 1000)
-
-
         }
     }
 }
@@ -527,18 +476,13 @@ function getOrientacion() {
     if (orientacion == 0) {
         return 'arriba';
     }
-
 }
-
 
 function comprobarRecorridoCompleto() {
     if (!arrayPuntosRecorridos.find(tda => tda == td)) {
-        // alert(arrayPuntosRecorridos)
         arrayPuntosRecorridos.push(td)
     }
     if (arrayPuntosRecorridos.length == ejeX * ejeY) {
-        //alert(arrayPuntosRecorridos.length + ' :' + arrayPuntosRecorridos)
-
         return true
     }
     else
@@ -547,7 +491,6 @@ function comprobarRecorridoCompleto() {
 
 function parar() {
     clearTimeout(movimiento)
-
 }
 
 function continuar() {
