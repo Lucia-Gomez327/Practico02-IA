@@ -75,7 +75,6 @@ function limpiar() {
     if ($(td).hasClass("mancha")) {
         $(td).removeClass("mancha")
     }
-
 }
 
 function setSecuencia() {

@@ -4,14 +4,12 @@ var movimiento
 var ejeX
 var ejeY
 var orientacion = 0
-var celda
 var inicioAspiradora
 var der = 0
 var izq = 0
 var td
 var x, y
 var izqder = -1
-var pararvolver
 var secuencia = new Array()
 var inicioX
 var inicioY
@@ -19,6 +17,11 @@ var vueltaAPosicionInicial = false
 var salto = -2
 var volviendo
 var count = 0
+
+
+var valores = new Array()
+
+
 
 var arrayPuntosRecorridos = new Array()
 
@@ -92,7 +95,7 @@ function mover() {
     if (comprobarRecorridoCompleto()) {
 
         if ((x + '' + y) == inicioAspiradora) {
-            ('termino en mover')
+            alert('termino en mover')
             vueltaAPosicionInicial = true
             return true
         }
@@ -132,7 +135,7 @@ if (comprobarRecorridoCompleto()) {
 function contador(){
 
     var inputContaro = document.getElementById("contador")
-    inputContaro.value = count++
+    inputContaro.value = ++count
     
 }
 
@@ -374,6 +377,9 @@ function yExMismaLinea() {
         if ((x + '' + y) == inicioAspiradora) {
             clearTimeout(volviendo)
             vueltaAPosicionInicial = true
+            alert("Todos los espacios están limpios.")
+            valores.push(count)
+            reiniciar();
             return true
         }
         else {
@@ -413,7 +419,9 @@ function yAbajoIzquierdaArribaDerecha(){
         if ((x + '' + y) == inicioAspiradora) {
             clearTimeout(volviendo)
             vueltaAPosicionInicial = true
-            ('Proceso terminado')
+            alert("Todos los espacios están limpios.")
+            valores.push(count)
+            reiniciar();
             return true
         }
         else {
@@ -453,7 +461,9 @@ function yAbajoDerechaArribaIzquierda(){
         if ((x + '' + y) == inicioAspiradora) {
             clearTimeout(volviendo)
             vueltaAPosicionInicial = true
-            ('Proceso terminado')
+            alert("Todos los espacios están limpios.")
+            valores.push(count);
+            reiniciar();
             return true
         }
         else {
@@ -495,4 +505,49 @@ function parar() {
 
 function continuar() {
     mover()
+}
+
+function reiniciar()
+{
+    var tabla = document.getElementById('table')
+    tabla.innerHTML = '';
+    inicializar();
+    crearTabla();
+    setAspiradora();
+
+
+}
+
+function inicializar()
+{
+    clearTimeout(movimiento)
+    clearTimeout(volviendo)
+
+    arrayPuntosRecorridos = new Array()
+    orientacion = 0
+    der = 0
+    izq = 0
+    izqder = -1
+    secuencia = new Array()
+    vueltaAPosicionInicial = false
+    salto = -2
+    count = 0
+}
+
+function promediar()
+{
+    if(valores)
+    {
+        var suma = 0;
+        let string = '-- Total de puntajes: --\n'
+        for (let i = 0; i < valores.length; i++) {
+            suma += valores[i];
+            string += "#"+ i +" ronda: obtuviste un puntaje de: " + valores[i] + "\n";
+        }
+        string += '\n';
+        string += 'Promedio: ' + (suma/valores.length);
+
+        alert(string);
+    }
+    else alert('¡Aún no has iniciado!')
 }
